@@ -1,0 +1,281 @@
+# rompe-el-silencio
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rompe el Silencio</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    line-height: 1.6;
+  }
+  header {
+    background: #182b49;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: .5px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600;
+  }
+  nav a:hover { text-decoration: underline; }
+
+  .hero {
+    text-align: center;
+    padding: 65px 20px 45px;
+    background: linear-gradient(135deg, #e7f0ff, #ffffff);
+  }
+  .hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #182b49;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  .cards {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(20,40,70,.1);
+    border-top: 6px solid #3867d6;
+    display: flex;
+    flex-direction: column;
+  }
+  .card h2 { margin-top: 0; color: #182b49; }
+  .card p { flex: 1; }
+  button, .emergency {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button {
+    background: #3867d6;
+    color: white;
+  }
+  button:hover { background: #274fae; }
+
+  .resources, .about, .contact {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 24px;
+  }
+  .section-box {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(20,40,70,.08);
+  }
+  .section-box h2 { color: #182b49; }
+
+  .resource-list {
+    display: grid;
+    gap: 12px;
+  }
+  .resource {
+    padding: 15px;
+    background: #eef4ff;
+    border-radius: 10px;
+  }
+  .emergency {
+    display: block;
+    text-align: center;
+    background: #d64545;
+    color: white;
+    text-decoration: none;
+    max-width: 900px;
+    margin: 20px auto 40px;
+  }
+  footer {
+    background: #182b49;
+    color: white;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    z-index: 20;
+    padding: 25px;
+  }
+  .modal-content {
+    background: white;
+    max-width: 550px;
+    margin: 8vh auto;
+    padding: 30px;
+    border-radius: 18px;
+  }
+  .close {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  label { display:block; margin-top: 12px; font-weight: bold; }
+  input, textarea {
+    width: 100%;
+    padding: 11px;
+    margin-top: 5px;
+    border: 1px solid #ccd3df;
+    border-radius: 8px;
+  }
+  textarea { min-height: 100px; resize: vertical; }
+
+  @media (max-width: 750px) {
+    header { flex-direction: column; }
+    nav a { margin: 0 7px; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">[LOGOTIPO] ROMPE EL SILENCIO</div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#quienes">Quiénes Somos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <h1>¡ROMPE EL SILENCIO!</h1>
+    <p>Tu voz es nuestro escudo. Juntos podemos construir una convivencia sin bullying.</p>
+  </section>
+
+  <section class="cards">
+    <article class="card">
+      <h2>📮 Buzón de Alerta Anónima</h2>
+      <p>Cuenta lo que está ocurriendo de manera segura y anónima. Tu información puede ayudar a prevenir situaciones de bullying.</p>
+      <button onclick="abrirModal()">Enviar alerta</button>
+    </article>
+
+    <article class="card">
+      <h2>🧭 Ruta de Acción</h2>
+      <p>Aprende qué hacer y a quién acudir cuando presencias o vives una situación de acoso escolar.</p>
+      <button onclick="document.getElementById('ruta').scrollIntoView({behavior:'smooth'})">Ver ruta</button>
+    </article>
+
+    <article class="card">
+      <h2>🎥 Recursos y Videos</h2>
+      <p>Encuentra materiales educativos para reconocer el bullying, actuar con respeto y pedir ayuda.</p>
+      <button onclick="document.getElementById('recursos').scrollIntoView({behavior:'smooth'})">Ver recursos</button>
+    </article>
+  </section>
+
+  <section class="resources" id="ruta">
+    <div class="section-box">
+      <h2>🧭 Ruta de Acción</h2>
+      <ol>
+        <li>Aléjate de la situación si existe riesgo.</li>
+        <li>Habla con un adulto de confianza, docente o tutor.</li>
+        <li>Guarda información que pueda ayudar a explicar lo sucedido.</li>
+        <li>Apoya a la persona afectada sin participar en las burlas.</li>
+        <li>Busca ayuda nuevamente si el problema continúa.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="resources" id="recursos">
+    <div class="section-box">
+      <h2>📚 Recursos Preventivos</h2>
+      <div class="resource-list">
+        <div class="resource"><strong>🎬 Video educativo:</strong> Cómo reconocer el bullying y pedir ayuda.</div>
+        <div class="resource"><strong>🧠 Infografía:</strong> Diferencias entre broma, conflicto y acoso.</div>
+        <div class="resource"><strong>📖 Lectura:</strong> Consejos para construir una convivencia respetuosa.</div>
+        <div class="resource"><strong>💬 Actividad:</strong> Ideas para apoyar a un compañero que necesita ayuda.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="quienes">
+    <div class="section-box">
+      <h2>Quiénes Somos</h2>
+      <p>Somos una campaña estudiantil que busca promover el respeto, la empatía y la convivencia sin bullying. Queremos que todas las personas sepan que su voz importa y que pedir ayuda es una forma de cuidarse.</p>
+    </div>
+  </section>
+
+  <a class="emergency" href="#contacto">🚨 Enlace de emergencia: Teléfono de ayuda / Chat directo con tutor</a>
+
+  <section class="contact" id="contacto">
+    <div class="section-box">
+      <h2>Contacto</h2>
+      <p>Si necesitas orientación, habla con un docente, tutor, familiar o adulto de confianza.</p>
+      <p><strong>📞 Teléfono de ayuda:</strong> Coloca aquí el número oficial de tu institución.</p>
+      <p><strong>💬 Chat con tutor:</strong> Coloca aquí el enlace oficial de tu institución.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>MANIFIESTO JUVENIL POR UNA CONVIVENCIA SIN BULLYING</strong>
+  <p>Utilizaremos nuestra voz para construir, no para destruir.</p>
+  <p>Respetaremos la dignidad de todas las personas y buscaremos ayuda cuando sea necesario.</p>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="cerrarModal()">×</span>
+    <h2>📮 Buzón de Alerta Anónima</h2>
+    <p>No escribas datos personales si quieres mantener el reporte anónimo.</p>
+    <label>¿Qué ocurrió?</label>
+    <textarea placeholder="Describe brevemente la situación..."></textarea>
+    <label>¿Dónde ocurrió?</label>
+    <input type="text" placeholder="Ej.: patio, aula, redes sociales...">
+    <br><br>
+    <button onclick="enviarAlerta()">Enviar alerta</button>
+  </div>
+</div>
+
+<script>
+function abrirModal(){ document.getElementById('modal').style.display='block'; }
+function cerrarModal(){ document.getElementById('modal').style.display='none'; }
+function enviarAlerta(){
+  alert('Tu alerta ha sido preparada. Para una página real, este formulario debe conectarse al sistema seguro de tu institución.');
+  cerrarModal();
+}
+window.onclick = function(e){
+  const modal = document.getElementById('modal');
+  if(e.target === modal) cerrarModal();
+}
+</script>
+</body>
+</html>
